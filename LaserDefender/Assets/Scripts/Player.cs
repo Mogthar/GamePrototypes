@@ -13,7 +13,13 @@ public class Player : MonoBehaviour
     [SerializeField] float _paddingTop;
     Vector2 _minimumBound;
     Vector2 _maximumBound;
+
+    Shooter shooter;
     // Update is called once per frame
+    void Awake()
+    {
+        shooter = GetComponent<Shooter>();
+    }
 
     void Start()
     {
@@ -37,8 +43,17 @@ public class Player : MonoBehaviour
     void OnMove(InputValue value)
     {
         rawInput = value.Get<Vector2>();
-        // Debug.Log(rawInput);
     }
+
+    void OnFire(InputValue value)
+    {
+        if(shooter != null)
+        {
+            shooter.isFiring = value.isPressed;
+        }
+    }
+
+
 
     void InitBounds()
     {
